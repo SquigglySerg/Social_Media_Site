@@ -10,7 +10,7 @@
 		<title>Primitive Skeet</title>
 	</head>
 	<body>
-		
+		INDEX
 		
 		
 	</body>
