@@ -12,7 +12,7 @@
 	<body>
 	<script src="script.js"></script>
 	
-	<!--use the GET hashed password to confirm user and then use update sql command to replace user password-->
+	<!--use the GET hashed password and EMAIL to confirm user and then use update sql command to replace user password-->
 	
 	
 	

@@ -20,7 +20,7 @@
 					
 					<label><b>Last Name</b></label>
 					<input type="text" id="Lname" placeholder="Enter Last Name" autocomplete="off" name="lname" required>
-					
+					<!--Make sure Email is unique send message to say this email was used previously to create an account...-->
 					<label><b>Email</b></label>
 					<input type="email" id="Email" placeholder="Enter Email" autocomplete="off" name="email" required>
 					
