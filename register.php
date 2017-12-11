@@ -10,8 +10,32 @@
 		<title>Modern Peeps</title>
 	</head>
 	<body>
-		
-		
-		
+		<script src="script.js"></script>
+		<div id="login" class="loginbox">
+			<form class="loginbox-content" method="post" action='<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>'>
+				
+				<div class="container">
+					<label><b>First Name</b></label>
+					<input type="text" id="Fname" placeholder="Enter First Name" autocomplete="off" name="fname" required>
+					
+					<label><b>Last Name</b></label>
+					<input type="text" id="Lname" placeholder="Enter Last Name" autocomplete="off" name="lname" required>
+					
+					<label><b>Email</b></label>
+					<input type="email" id="Email" placeholder="Enter Email" autocomplete="off" name="email" required>
+					
+					<label><b>Password</b></label>
+					<input type="password" id="Psw" placeholder="Enter Password" autocomplete="off" name="psw" onmouseover="mouseoverPass();" onmouseout="mouseoutPass();" required>
+					<small>Mouse over text box to see password</small>
+					<br><br>
+					<button type="submit">Login</button>
+				</div>
+				
+				<div class="container" style="background-color:#f1f1f1">
+					<!-- Make cancel redirect to index page or previous page -->
+					<button type="button" onclick="window.location='index.php'" class="cancelbtn">Cancel</button>
+				</div>
+			</form>
+		</div>
 	</body>
 </html>

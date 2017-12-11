@@ -9,40 +9,31 @@
 		<link rel="stylesheet" href="style.css">
 		<title>Modern Peeps</title>
 	</head>
-	
-	
-	
 	<body>
-	
-	
-	
-	
-	
-	
-	
+		<script src="script.js"></script>
 		<div id="login" class="loginbox">
-					
+			
 			<form class="loginbox-content" method="post" action='<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>'>
-								
+				
 				<div class="container">
 					<label><b>Email</b></label>
 					<input type="email" id="Email" placeholder="Enter Email" autocomplete="off" name="email" required>
 					
 					<label><b>Password</b></label>
-					<input type="password" id="Psw" placeholder="Enter Password" autocomplete="off" name="psw"  required>
+					<input type="password" id="Psw" placeholder="Enter Password" autocomplete="off" name="psw" onmouseover="mouseoverPass();" onmouseout="mouseoutPass();" required>
+					<small>Mouse over text box to see password</small>
+					<br><br>
 					
 					
 					<button type="submit">Login</button>
 				</div>
 				
 				<div class="container" style="background-color:#f1f1f1">
-				<!-- Make cancel redirect to index page or previous page -->
+					<!-- Make cancel redirect to index page or previous page -->
 					<button type="button" onclick="window.location='index.php'" class="cancelbtn">Cancel</button>
-					<span class="psw">Reset <a href="passwordchange.php">password?</a></span>
+					<span class="psw">Create <a href="register.php">New Account</a> or Reset <a href="passwordchange.php">password?</a></span>
 				</div>
 			</form>
 		</div>
-		
-		
 	</body>
 </html>
