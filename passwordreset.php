@@ -10,15 +10,20 @@
 		<title>Modern Peeps</title>
 	</head>
 	<body>
+	<script src="script.js"></script>
+	
+	<!--use the GET hashed password to confirm user and then use update sql command to replace user password-->
+	
+	
 	
 		<form class="loginbox-content" method="post" action='<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>'>
 			
 			<div class="container">
-				<label><b>Your Email Address</b></label>
-				<!-- Check if email exists if not return message using php and querying the database-->
-				<input type="email" id="Email" placeholder="Enter Email" autocomplete="off" name="email" required>
+				<label><b</b></label>
+				<input type="password" id="Psw" placeholder="Enter Password" autocomplete="off" name="psw" onmouseover="mouseoverPass();" onmouseout="mouseoutPass();" required>
+					<small>Mouse over text box to see password</small>
 				
-				<button type="submit">Send Instruction</button>
+				<button type="submit">Submit</button>
 			</div>
 			
 			<div class="container" style="background-color:#f1f1f1">
