@@ -10,7 +10,22 @@
 		<title>Modern Peeps</title>
 	</head>
 	<body>
-		PW CHANGE
+		<form class="loginbox-content" method="post" action='<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>'>
+			
+			<div class="container">
+				<label><b>Your Email Address</b></label>
+				<!-- Check if email exists if not return message -->
+				<input type="email" id="Email" placeholder="Enter Email" autocomplete="off" name="email" required>
+				
+				<button type="submit">Send Instruction</button>
+			</div>
+			
+			<div class="container" style="background-color:#f1f1f1">
+				
+				<button type="button" onclick="window.location='index.php'" class="cancelbtn">Cancel</button>
+				<span class="psw">Create <a href="register.php">New Account</a></span>
+			</div>
+		</form>
 		
 		
 	</body>

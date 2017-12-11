@@ -32,7 +32,6 @@
 				</div>
 				
 				<div class="container" style="background-color:#f1f1f1">
-					<!-- Make cancel redirect to index page or previous page -->
 					<button type="button" onclick="window.location='index.php'" class="cancelbtn">Cancel</button>
 				</div>
 			</form>
