@@ -17,14 +17,14 @@
 				
 				<div class="container">
 					<label><b>First Name</b></label><span class="error">* <?php echo $fnameErr;?></span>
-					<input type="text" id="Fname" placeholder="Enter First Name" autocomplete="off" name="fname" required>
+					<input type="text" id="Fname" placeholder="Enter First Name" autocomplete="off" name="fname" value="<?php echo $fname ?>" required>
 					
 					<label><b>Last Name</b></label><span class="error">* <?php echo $lnameErr;?></span>
-					<input type="text" id="Lname" placeholder="Enter Last Name" autocomplete="off" name="lname" required>
+					<input type="text" id="Lname" placeholder="Enter Last Name" autocomplete="off" name="lname" value="<?php echo $lname ?>" required>
 					
 					<!--Make sure Email is unique send message to say this email was used previously to create an account...-->
 					<label><b>Email</b></label><span class="error">* <?php echo $emailErr;?></span>
-					<input type="email" id="Email" placeholder="Enter Email" autocomplete="off" name="email" required>
+					<input type="email" id="Email" placeholder="Enter Email" autocomplete="off" name="email" value="<?php echo $email ?>" required>
 					
 					<label><b>Password</b></label><span class="error">* <?php echo $pswErr;?></span>
 					<input type="password" id="Psw" placeholder="Enter Password" autocomplete="off" name="psw" onmouseover="mouseoverPass();" onmouseout="mouseoutPass();" required>
