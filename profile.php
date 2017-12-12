@@ -10,8 +10,13 @@
 		<title>Modern Peeps</title>
 	</head>
 	<body>
-		
-		
+		<div id="profile_info">
+			<div id="intro">
+			Introduction
+			</div>		
+			<div id="profile_image">
+			</div>
+		</div>
 		
 	</body>
 </html>

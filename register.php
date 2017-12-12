@@ -30,7 +30,7 @@
 					<input type="password" id="Psw" placeholder="Enter Password" autocomplete="off" name="psw" onmouseover="mouseoverPass();" onmouseout="mouseoutPass();" required>
 					<small>Mouse over text box to see password</small>
 					<br><br>
-					<button type="submit">Login</button>
+					<button type="submit">Create Account</button>
 				</div>
 				
 				<div class="container" style="background-color:#f1f1f1">
