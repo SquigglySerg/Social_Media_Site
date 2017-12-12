@@ -11,6 +11,7 @@
 	</head>
 	<body>
 		<script src="script.js"></script>
+		<?php include 'login_submit.php'; ?>
 		<div id="login" class="loginbox">
 			
 			<form class="loginbox-content" method="post" action='<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>'>
@@ -23,6 +24,7 @@
 					<input type="password" id="Psw" placeholder="Enter Password" autocomplete="off" name="psw" onmouseover="mouseoverPass();" onmouseout="mouseoutPass();" required>
 					<small>Mouse over text box to see password</small>
 					<br><br>
+					<span class="error"><?php echo $authenticationErr;?></span>
 					
 					
 					<button type="submit">Login</button>
