@@ -48,17 +48,54 @@
 	  } else {
 		$psw = test_input($_POST["psw"]);
 		// check if password meets necessary requirements
-		// At least one number, one letter, or one of the following !@#$% and of length 8-36
+		// At least one number, one letter, or at least one of the following !@#$% and of length 8-36
 		if (!preg_match('/^(?=.*\d)(?=.*[A-Za-z])[0-9A-Za-z!@#$%]{8,36}$/', $psw)) {
 		  $pswErr = "Password must contain at least one number, one letter, or one of the following !@#$% and be 8-36 characters long.";
 		}
 		else {
-			$pswErr = "";
+		  $pswErr = "";
 		}
 	  }
 	  
-	  if($fnameErr == "" && $lnameErr == "" && $emailErr == "" && $pswErr == ""){
-		echo "<p>" . $fname . " " . $lname . " " . $email . " " . $psw . "</p>";
+	  if($fnameErr == "" && $lnameErr == "" && $emailErr == "" && $pswErr == ""){ //Submition valid
+		//Connect to the DB
+		$servername = "localhost"; //Using my local database for testing -Sergio
+		$username = "serodrig";
+		$password = "AAIOWYSM";
+		$dBName = "f17_serodrig";
+
+		// Create connection
+		$conn = new mysqli($servername, $username, $password, $dBName);
+
+		// Check connection
+		if ($conn->connect_error) {
+			die("Connection failed: " . $conn->connect_error);
+		}
+		
+		$userQuery = "SELECT email FROM Users WHERE email = ?";
+		$stmt = $conn->prepare($userQuery);
+		$stmt->bind_param("s", $email);
+		$stmt->execute();
+
+		//Check if the customer exist, if not create customer
+		if($stmt->fetch()){
+			//User Exist
+			$emailErr = "Email already in use";
+		}
+		else{
+			//Create user
+			$addCustomerQuery = "INSERT INTO Users (email, firstName, lastName, password) VALUES (?,?,?,?)";
+			$stmtAddCustomer = $conn->prepare($addCustomerQuery);
+			
+			//Hash Password
+			$pswHash = password_hash($psw, PASSWORD_DEFAULT);
+			
+			$stmtAddCustomer->bind_param("ssss", $email, $fname, $lname, $pswHash);
+			$stmtAddCustomer->execute();
+			$stmtAddCustomer->close();
+		}
+		$stmt->close();
+		$conn->close();
 	  }
 	  
 	}
