@@ -11,20 +11,22 @@
 	</head>
 	<body>
 		<script src="script.js"></script>
+		<?php include 'register_submit.php'; ?>
 		<div id="login" class="loginbox">
 			<form class="loginbox-content" method="post" action='<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>'>
 				
 				<div class="container">
-					<label><b>First Name</b></label>
+					<label><b>First Name</b></label><span class="error">* <?php echo $fnameErr;?></span>
 					<input type="text" id="Fname" placeholder="Enter First Name" autocomplete="off" name="fname" required>
 					
-					<label><b>Last Name</b></label>
+					<label><b>Last Name</b></label><span class="error">* <?php echo $lnameErr;?></span>
 					<input type="text" id="Lname" placeholder="Enter Last Name" autocomplete="off" name="lname" required>
+					
 					<!--Make sure Email is unique send message to say this email was used previously to create an account...-->
-					<label><b>Email</b></label>
+					<label><b>Email</b></label><span class="error">* <?php echo $emailErr;?></span>
 					<input type="email" id="Email" placeholder="Enter Email" autocomplete="off" name="email" required>
 					
-					<label><b>Password</b></label>
+					<label><b>Password</b></label><span class="error">* <?php echo $pswErr;?></span>
 					<input type="password" id="Psw" placeholder="Enter Password" autocomplete="off" name="psw" onmouseover="mouseoverPass();" onmouseout="mouseoutPass();" required>
 					<small>Mouse over text box to see password</small>
 					<br><br>
