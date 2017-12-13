@@ -84,13 +84,14 @@
 		}
 		else{
 			//Create user
-			$addCustomerQuery = "INSERT INTO Users (email, firstName, lastName, password) VALUES (?,?,?,?)";
+			$addCustomerQuery = "INSERT INTO Users (email, firstName, lastName, password, verified) VALUES (?,?,?,?,?)";
 			$stmtAddCustomer = $conn->prepare($addCustomerQuery);
 			
 			//Hash Password
 			$pswHash = password_hash($psw, PASSWORD_DEFAULT);
 			
-			$stmtAddCustomer->bind_param("ssss", $email, $fname, $lname, $pswHash);
+			$verified = false;
+			$stmtAddCustomer->bind_param("sssss", $email, $fname, $lname, $pswHash, $verified);
 			$stmtAddCustomer->execute();
 			$stmtAddCustomer->close();
 			
@@ -108,8 +109,18 @@
 			$stmtAddCustomer->execute();
 			$stmtAddCustomer->close();
 			
+			//Send verification email
+			$msgLink = "http://luna.mines.edu/serodrig/emailverify.php?email=" . $email . "&code=" . $pswHash;
+			$message = "Click the link below to verify your email\r\n\r\n" . $msgLink; // The message
+			
+			// In case any of our lines are larger than 70 characters, we should use wordwrap()
+			$message = wordwrap($message, 70, "\r\n");
+			
+			// Send
+			mail($email, 'Modern Peeps: Email Verification', $message);
+	
 			//Redirect to the login screen
-			redirect("./login.php");
+			redirect("./emailverify.php");
 		}
 		$stmt->close();
 		$conn->close();
