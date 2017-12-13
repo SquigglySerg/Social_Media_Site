@@ -19,7 +19,7 @@
 				
 				<div class="container">
 					<label><b>Email</b></label>
-					<input type="email" id="Email" placeholder="Enter Email" autocomplete="off" name="email" required>
+					<input type="email" id="Email" placeholder="Enter Email" autocomplete="off" name="email" value="<?php echo $email ?>" required>
 					
 					<label><b>Password</b></label>
 					<input type="password" id="Psw" placeholder="Enter Password" autocomplete="off" name="psw" onmouseover="mouseoverPass();" onmouseout="mouseoutPass();" required>
