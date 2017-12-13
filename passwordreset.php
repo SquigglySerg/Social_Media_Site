@@ -15,13 +15,17 @@
 	<!--use the GET hashed password and EMAIL to confirm user and then use update sql command to replace user password-->
 	
 	
-	
+		<?php include './passwordreset_submit.php';
+			  session_start();
+			  $time = $_SERVER['REQUEST_TIME'];
+			  $_SESSION['LAST_ACTIVITY'] = $time;?>
 		<form class="loginbox-content" method="post" action='<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>'>
 			
 			<div class="container">
-				<label><b</b></label>
+				<label><b</b></label><span>*Password must contain at least one number, one letter, or one of the following !@#$% and be 8-36 characters long.</span>
 				<input type="password" id="Psw" placeholder="Enter Password" autocomplete="off" name="psw" onmouseover="mouseoverPass();" onmouseout="mouseoutPass();" required>
-					<small>Mouse over text box to see password</small>
+					<small>Mouse over text box to see password</small><br>
+					<span class="error"><?php echo $pswErr;?></span>
 				
 				<button type="submit">Submit</button>
 			</div>

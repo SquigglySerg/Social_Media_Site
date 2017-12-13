@@ -43,14 +43,29 @@
 			//User exist send email with password reset
 			$stmt->close();
 			
-			// The message
-			$message = "Line 1\r\nLine 2\r\nLine 3";
+			//Obtained the stored hashed password in the database
+			$userPSWQuery = "SELECT password FROM Users WHERE email = ?";
+			$pswStmt = $conn->prepare($userPSWQuery);
+			$pswStmt->bind_param("s", $email);
+			$pswStmt->execute();
 			
-			// In case any of our lines are larger than 70 characters, we should use wordwrap()
-			$message = wordwrap($message, 70, "\r\n");
-			
-			// Send
-			mail($email, 'Modern Peeps: Password Reset', $message);
+			$pswResult = $pswStmt->get_result();
+			if($pswResult->num_rows == 1){
+				if($hash = $pswResult->fetch_assoc()){ //Get the password
+					$hash2 = "http://luna.mines.edu/serodrig/passwordreset.php?reset=" . $hash["password"] . "&email=" . $email; 
+					
+					// The message
+					$message = "Click the link below to reset your password\r\n\r\n" . $hash2 . "\r\n\r\nIf you did not request this ignore this message";
+					
+					// In case any of our lines are larger than 70 characters, we should use wordwrap()
+					$message = wordwrap($message, 70, "\r\n");
+					
+					// Send
+					mail($email, 'Modern Peeps: Password Reset', $message);
+					
+					redirect("./login.php");
+				}
+			}
 		}
 		else{
 			//User does not exist
@@ -67,4 +82,11 @@
 	  $data = htmlspecialchars($data);
 	  return $data;
 	}	
+	
+	function redirect($url) {
+	  ob_start();
+	  header('Location: '.$url);
+	  ob_end_flush();
+	  die();
+	}
 ?>
