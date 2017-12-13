@@ -11,12 +11,14 @@
 	</head>
 	<body>
 	
+		<?php include 'passwordchange_submit.php';?>
 		<form class="loginbox-content" method="post" action='<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>'>
 			
 			<div class="container">
 				<label><b>Your Email Address</b></label>
 				<!-- Check if email exists if not return message using php and querying the database-->
-				<input type="email" id="Email" placeholder="Enter Email" autocomplete="off" name="email" required>
+				<input type="email" id="Email" placeholder="Enter Email" autocomplete="off" name="email" value="<?php echo $email ?>" required>
+				<span class="error"><?php echo $emailErr;?></span>
 				
 				<button type="submit">Send Instruction</button>
 			</div>
