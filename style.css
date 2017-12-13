@@ -70,46 +70,56 @@ span.psw {
 STYLING FOR PROFILE PAGE*/
 
 /*Make a box that contains the profile information to organize data*/
-#profile_info {
+.profile_info {
 	margin: auto;
 	width: 80%;
-	height: 900px;
+	height: 90vh;
 	border: 5px solid black;
 	padding: 10px;
-	
+	padding-top: 20px;
 }
 
-#profile_image {
-	float: left;
-	position: relative;
+.profile_image{
+	display: block;
 	border: 5px solid black;
-	height: 500px;
-	width: 500px;
-	margin-left: 100px;
-	margin-top: 50px;
+	margin: auto;
+	width: 300px;
+	height:300px;
+
 	border-radius: 50%;
 }
 
-#profile_image img {
-	width: 500px;
-	height: 500px;
+ #img{
+	display: hidden;
+	border: 5px solid black;
+	margin: auto;
+	width: 300px;
+	height:300px;
+
 	border-radius: 50%;
 }
 
 #selectors {
-	float: left;
-	margin-top: 100px;
-	margin-left: -400px;
+	text-align: center;
+	display: block;
+	margin: auto;	
 	border: solid 1px black;
 }
 
-#intro, #hobbies, #music {
+
+
+ #image, #backgroundcolor {
+	display: block;
+	margin: auto;	
+	border: solid 1px black;
+}
+
+.intro, .hobbies, .music {
+	display: block;
 	border: 5px solid black;
-	float: right;
-	margin-right: 200px;
-	margin-top: 50px;
-	height: 200px;
-	width: 30%;
+	margin: auto;
+	height:20vh;
+	width: 80%;
 	background-color: yellow;
 }
 

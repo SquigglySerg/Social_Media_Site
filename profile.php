@@ -12,46 +12,45 @@
 	<script>
 		function changeColor() {
 			if(document.getElementById('background_colors').value == "cyan") {
-                        	document.getElementById("profile_info").style = "background-color: cyan";
+                        	document.getElementsByClassName("profile_info")[0].style = "background-color: cyan";
                 	}   	
 			else if(document.getElementById('background_colors').value == "yellow") {
-                        	document.getElementById("profile_info").style = "background-color: yellow";
+                        	document.getElementsByClassName("profile_info")[0].style = "background-color: yellow";
                 	}   	
 			else if(document.getElementById('background_colors').value == "red") {
-                        	document.getElementById("profile_info").style = "background-color: red";
+                        	document.getElementsByClassName("profile_info")[0].style = "background-color: red";
                 	}   	
 		}
 	
 		function changeImage() {
 			if(document.getElementById('images').value == "cat") {
                         	document.getElementById("img").src = "images/cat.jpg";
+							document.getElementById("img").style = "display: block;";
+							document.getElementsByClassName("profile_image")[0].style = "display: hidden;";
+							
                 	}   	
 			else if(document.getElementById('images').value == "dog") {
                         	document.getElementById("img").src = "images/dog.jpg";
+							document.getElementById("img").style = "display: block;";
+														document.getElementsByClassName("profile_image")[0].style = "display: hidden;";
+
                 	}   	
 			else if(document.getElementById('images').value == "turtle") {
                         	document.getElementById("img").src = "images/turtle.jpg";
-                	}   	
+							document.getElementById("img").style = "display: block;";
+							document.getElementsByClassName("profile_image")[0].style = "display: hidden;";
+
+							}   	
 		}
 	</script>
+	
+
+	
 	<body>
-		<div id="profile_info">
-			<div id="profile_image">
-			<img id="img" src="" alt="#">
-			</div>
-			
-			<div id="intro">
-			Introduction
+		<div class="profile_info">
+			<div class="profile_image">
+			<img id="img" src="#" alt="#" style="display: hidden;">
 			</div>		
-			
-			<div id="hobbies">
-			Hobbies
-			</div>
-			
-			<div id="music">
-			Music
-			</div>
-			
 			<div id="selectors">
 				<select id="images" onChange="changeImage()">
 					<option value="none">Select an Avatar Image</option>
@@ -67,6 +66,21 @@
 					<option value="red">Red</option>
 				</select>
 			</div>
+			
+			<br>
+			<div class="intro">
+			Introduction
+			</div>		
+			<br>
+			<div class="hobbies">
+			Hobbies
+			</div>
+			<br>
+			<div class="music">
+			Music
+			</div>
+			
+
 		</div>
 		
 	</body>
