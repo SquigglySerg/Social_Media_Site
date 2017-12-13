@@ -87,6 +87,11 @@
                 	$stmt->bind_param("ss", $music, $email);
                 	$stmt->execute();
 			$stmt->close();
+			$intro = "<script>document.getElementById('').src<//script>"
+        	        $userQuery = "UPDATE User_Profile SET avatar = ? WHERE email LIKE ?";
+                	$stmt = $conn->prepare($userQuery);
+                	$stmt->bind_param("ss", $avatar, $email);
+                	$stmt->execute();
 			$stmt->close();
 			$conn->close();
 		}
