@@ -6,9 +6,9 @@ CREATE TABLE Users (
 );
 
 CREATE TABLE User_Profile (
-	intro varchar(255),
-	hobbies varchar(255),
-	music varchar(255),
+	intro varchar(1023),
+	hobbies varchar(1023),
+	music varchar(1023),
 	email varchar(255),
 	FOREIGN KEY(email) REFERENCES Users(email)
 );
