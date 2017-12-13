@@ -94,6 +94,20 @@
 			$stmtAddCustomer->execute();
 			$stmtAddCustomer->close();
 			
+			//Create user profile shell
+			$addCustomerQuery = "INSERT INTO User_Profile (intro, hobbies, music, avatar, background, email) VALUES (?,?,?,?,?,(SELECT email FROM Users WHERE email = ?))";
+			$stmtAddCustomer = $conn->prepare($addCustomerQuery);
+			
+			$intro = "Go to editinfo to change intro";
+			$hobbies = "Go to editinfo to change hobbies";
+			$music = "Go to editinfo to change music";
+			$avatar = "";
+			$background = "";
+			
+			$stmtAddCustomer->bind_param("ssssss", $intro, $hobbies, $music, $avatar, $background, $email);
+			$stmtAddCustomer->execute();
+			$stmtAddCustomer->close();
+			
 			//Redirect to the login screen
 			redirect("./login.php");
 		}
