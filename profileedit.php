@@ -11,104 +11,86 @@
 	</head>
 	<script>
 		function changeColor() {
-			// Connect to database
-			$servername = "localhost"; //Using my local database for testing -Sergio
-                	$username = "serodrig";
-                	$password = "AAIOWYSM";
-                	$dBName = "f17_serodrig";
-
-                	// Create connection
-                	$conn = new mysqli($servername, $username, $password, $dBName);
-
-                	// Check connection
-                	if ($conn->connect_error) {
-                        	die("Connection failed: " . $conn->connect_error);
-                	}	
-			$email = $_SESSION["email"];				
-
 			if(document.getElementById('background_colors').value == "cyan") {
                         	document.getElementById("profile_info").style = "background-color: cyan";
-                		$userQuery = "UPDATE User_Profile SET background = 'cyan' WHERE email = ?";
-                		$stmt = $conn->prepare($userQuery);
-                		$stmt->bind_param("s", $email);
-                		$stmt->execute();			
-				
                 	}   	
 			else if(document.getElementById('background_colors').value == "yellow") {
                         	document.getElementById("profile_info").style = "background-color: yellow";
-                		$userQuery = "UPDATE User_Profile SET background = 'yellow' WHERE email = ?";
-                		$stmt = $conn->prepare($userQuery);
-                		$stmt->bind_param("s", $email);
-                		$stmt->execute();			
                 	}   	
 			else if(document.getElementById('background_colors').value == "red") {
                         	document.getElementById("profile_info").style = "background-color: red";
-                		$userQuery = "UPDATE User_Profile SET background = 'red' WHERE email = ?";
-                		$stmt = $conn->prepare($userQuery);
-                		$stmt->bind_param("s", $email);
-                		$stmt->execute();			
                 	}
-			$stmt->close();
-			$conn->close();   	
 		}
-	
+
 		function changeImage() {
-			// Connect to database
-			$servername = "localhost"; //Using my local database for testing -Sergio
-                	$username = "serodrig";
-                	$password = "AAIOWYSM";
-                	$dBName = "f17_serodrig";
-
-                	// Create connection
-                	$conn = new mysqli($servername, $username, $password, $dBName);
-
-                	// Check connection
-                	if ($conn->connect_error) {
-                        	die("Connection failed: " . $conn->connect_error);
-                	}	
-			$email = $_SESSION["email"];
-
 			if(document.getElementById('images').value == "cat") {
                         	document.getElementById("img").src = "images/cat.jpg";
-                		$userQuery = "UPDATE User_Profile SET avatar = 'images/car.jpg' WHERE email = ?";
-                		$stmt = $conn->prepare($userQuery);
-                		$stmt->bind_param("s", $email);
-                		$stmt->execute();			
                 	}   	
 			else if(document.getElementById('images').value == "dog") {
                         	document.getElementById("img").src = "images/dog.jpg";
-                		$userQuery = "UPDATE User_Profile SET avatar = 'images/car.jpg' WHERE email = ?";
-                		$stmt = $conn->prepare($userQuery);
-                		$stmt->bind_param("s", $email);
-                		$stmt->execute();			
                 	}   	
 			else if(document.getElementById('images').value == "turtle") {
                         	document.getElementById("img").src = "images/turtle.jpg";
-                		$userQuery = "UPDATE User_Profile SET avatar = 'images/car.jpg' WHERE email = ?";
-                		$stmt = $conn->prepare($userQuery);
-                		$stmt->bind_param("s", $email);
-                		$stmt->execute();			
                 	}   	
+		}
+		
+		function submitChanges() {
+			//Connect to the DB
+	                $servername = "localhost"; //Using my local database for testing -Sergio
+	                $username = "serodrig";
+	                $password = "AAIOWYSM";
+	                $dBName = "f17_serodrig";
+
+        	        // Create connection
+        	        $conn = new mysqli($servername, $username, $password, $dBName);
+
+        	        // Check connection
+        	        if ($conn->connect_error) {
+        	                die("Connection failed: " . $conn->connect_error);
+        	        }
+
+			// update avatar image path 
+			$avatar = "<script>document.getElementById('img').src<//script>"
+        	        $userQuery = "UPDATE User_Profile SET avatar = ? WHERE email LIKE ?";
+                	$stmt = $conn->prepare($userQuery);
+                	$stmt->bind_param("ss", $avatar, $email);
+                	$stmt->execute();
 			$stmt->close();
-			$conn->close();   	
+			
+			// update background color 
+			$color = "<script>document.getElementById('background_colors').value<//script>"
+        	        $userQuery = "UPDATE User_Profile SET background = ? WHERE email LIKE ?";
+                	$stmt = $conn->prepare($userQuery);
+                	$stmt->bind_param("ss", $color, $email);
+                	$stmt->execute();
+			$stmt->close();
+
+			// update avatar image path 
+			$intro = "<script>document.getElementById('').src<//script>"
+        	        $userQuery = "UPDATE User_Profile SET avatar = ? WHERE email LIKE ?";
+                	$stmt = $conn->prepare($userQuery);
+                	$stmt->bind_param("ss", $avatar, $email);
+                	$stmt->execute();
+			$stmt->close();
+			$conn->close();
 		}
 	</script>
 	<body>
 		<div id="profile_info">
 			<div id="profile_image">
-			<img id="img" src="" alt="#">
+				<img id="img" src="" alt="">
 			</div>
 			
 			<div id="intro">
-			Introduction
+				<textarea id="text1"></textarea>
 			</div>		
 			
 			<div id="hobbies">
-			Hobbies
+				<textarea id="text2"></textarea>
 			</div>
 			
 			<div id="music">
-			Music
+				<textarea id="text3"></textarea>
 			</div>
 			
 			<div id="selectors">
@@ -126,6 +108,7 @@
 					<option value="red">Red</option>
 				</select>
 			</div>
+			<button type="submit" onClick="submitChanges()">Submit Changes</button>
 		</div>
 		
 	</body>
