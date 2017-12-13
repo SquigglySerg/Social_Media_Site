@@ -63,7 +63,8 @@
 					//Check if it is correct
 					if (password_verify($psw, $hash["password"])) {
 						//Password is valid
-						redirect("./profile.php/?email=" . $email);
+						$_SESSION["email"] = $email;
+						redirect("./profile.php/");
 					} 
 					else {
 						//Invalid password
