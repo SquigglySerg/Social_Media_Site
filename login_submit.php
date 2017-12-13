@@ -49,27 +49,37 @@
 		//Check if the customer exist, if not prevent access
 		if($stmt->fetch()){
 			//User Exist, so check password
+			$stmt->close(); //Have to close before the nextquery
 			
+			//First obtained the stored hashed password on the database
+			$userPSWQuery = "SELECT password FROM Users WHERE email = ?";
+			$pswStmt = $conn->prepare($userPSWQuery);
+			$pswStmt->bind_param("s", $email);
+			$pswStmt->execute();
 			
-			$hash = '$2y$07$BCryptRequires22Chrcte/VlQH0piJtjXl.0t1XkA8pw9dMXTpOq';
-			
-			if (password_verify($psw, $hash)) {
-				//Password is valid
-				
-				redirect("./index.php");
-			} 
-			else {
-				//Invalid password
-				$authenticationErr = "User or password incorrect";
+			$pswResult = $pswStmt->get_result();
+			if($pswResult->num_rows == 1){
+				if($hash = $pswResult->fetch_assoc()){ //Get the password
+					//Check if it is correct
+					if (password_verify($psw, $hash["password"])) {
+						//Password is valid
+						redirect("./index.php");
+					} 
+					else {
+						//Invalid password
+						$authenticationErr = "Email or password incorrect";
+					}
+				}
 			}
 			
+			$pswStmt->close();
 		}
 		else{
 			//User does not exist, so deny access
 			$authenticationErr = "User not recognised";
+			$stmt->close();
 		}
 		
-		$stmt->close();
 		$conn->close();
 	  }
 	  
