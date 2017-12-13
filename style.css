@@ -113,6 +113,10 @@ STYLING FOR PROFILE PAGE*/
 	background-color: yellow;
 }
 
+textarea {
+	width: 99%;
+	height: 97%;
+}
 /************************************************************************************************/
 /*Responsive design for 480px screen*/
 
