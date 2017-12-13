@@ -36,7 +36,7 @@
 		
 		function submitChanges() {
 			//Connect to the DB
-	                $servername = "localhost"; //Using my local database for testing -Sergio
+	                /*$servername = "localhost"; //Using my local database for testing -Sergio
 	                $username = "serodrig";
 	                $password = "AAIOWYSM";
 	                $dBName = "f17_serodrig";
@@ -48,7 +48,8 @@
         	        if ($conn->connect_error) {
         	                die("Connection failed: " . $conn->connect_error);
         	        }
-
+			
+			$email = $_SESSION["email"];
 			// update avatar image path 
 			$avatar = "<script>document.getElementById('img').src<//script>"
         	        $userQuery = "UPDATE User_Profile SET avatar = ? WHERE email LIKE ?";
@@ -64,38 +65,38 @@
                 	$stmt->bind_param("ss", $color, $email);
                 	$stmt->execute();
 			$stmt->close();
-
-			// update avatar image path 
+				
+			// update intro
 			$intro = "<script>document.getElementById('text1').value<//script>"
-        	        $userQuery = "UPDATE User_Profile SET avatar = ? WHERE email LIKE ?";
+        	        $userQuery = "UPDATE User_Profile SET intro = ? WHERE email LIKE ?";
                 	$stmt = $conn->prepare($userQuery);
                 	$stmt->bind_param("ss", $intro, $email);
                 	$stmt->execute();
 			$stmt->close();
 
-			// update avatar image path 
+			// update hobbies
 			$hobbies = "<script>document.getElementById('text2').value<//script>"
-        	        $userQuery = "UPDATE User_Profile SET avatar = ? WHERE email LIKE ?";
+        	        $userQuery = "UPDATE User_Profile SET hobbies = ? WHERE email LIKE ?";
                 	$stmt = $conn->prepare($userQuery);
                 	$stmt->bind_param("ss", $hobbies, $email);
                 	$stmt->execute();
 
-			// update avatar image path 
+			// update music
 			$music = "<script>document.getElementById('text3').value<//script>"
-        	        $userQuery = "UPDATE User_Profile SET avatar = ? WHERE email LIKE ?";
+        	        $userQuery = "UPDATE User_Profile SET music = ? WHERE email LIKE ?";
                 	$stmt = $conn->prepare($userQuery);
                 	$stmt->bind_param("ss", $music, $email);
                 	$stmt->execute();
-			$stmt->close();
-			$intro = "<script>document.getElementById('').src<//script>"
-        	        $userQuery = "UPDATE User_Profile SET avatar = ? WHERE email LIKE ?";
-                	$stmt = $conn->prepare($userQuery);
-                	$stmt->bind_param("ss", $avatar, $email);
-                	$stmt->execute();
-			$stmt->close();
-			$conn->close();
+			$stmt->close();*/
+
+			//$conn->close();
+			window.alert("Your changes have been submitted");
 		}
 	</script>
+	<?php
+		if(isset($_POST['submit_button'])) {
+		}
+	?>
 	<body>
 		<div id="profile_info">
 			<div id="profile_image">
@@ -129,7 +130,9 @@
 					<option value="red">Red</option>
 				</select>
 			</div>
-			<button type="submit" onClick="submitChanges()">Submit Changes</button>
+			<form method="POST" action=''>
+				<input type="submit" name="submit_button" value="Submit Changes">
+			</form>
 		</div>
 		
 	</body>
