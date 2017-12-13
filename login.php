@@ -1,3 +1,4 @@
+<?php session_start();?>
 <!DOCTYPE html>
 <html lang="en-US">
     <head>
@@ -11,18 +12,20 @@
 	</head>
 	<body>
 		<script src="script.js"></script>
+		<?php include 'login_submit.php'; ?>
 		<div id="login" class="loginbox">
 			
 			<form class="loginbox-content" method="post" action='<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>'>
 				
 				<div class="container">
 					<label><b>Email</b></label>
-					<input type="email" id="Email" placeholder="Enter Email" autocomplete="off" name="email" value="<?php echo $email ?>" required>
+					<input type="email" id="Email" placeholder="Enter Email" autocomplete="off" name="email" required>
 					
 					<label><b>Password</b></label>
 					<input type="password" id="Psw" placeholder="Enter Password" autocomplete="off" name="psw" onmouseover="mouseoverPass();" onmouseout="mouseoutPass();" required>
 					<small>Mouse over text box to see password</small>
 					<br><br>
+					<span class="error"><?php echo $authenticationErr;?></span>
 					
 					
 					<button type="submit">Login</button>
