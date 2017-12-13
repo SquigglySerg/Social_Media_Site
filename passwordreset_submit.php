@@ -1,65 +1,48 @@
 <?php
-	$hash = $email = $pswErr = "";
+	$pswErr = $email = $hash = "";
+	session_set_cookie_params(900,"/");
+	session_start(); 
 	
 	//Get the passed in emall
 	if(isset($_GET['email'])){
-		$email = $_GET['email'];
-		echo "STUFF OBTAINED FROM SESSSION";
+		$email = test_input($_GET['email']);
+		$_SESSION["email"] = $email;
 	}
 	
 	//Get the passed in hash for the password reset
 	if(isset($_GET['reset'])){
-		$hash = $_GET['reset'];
-		echo "STUFF OBTAINED FROM SESSSION";
+		$hash = test_input($_GET['reset']);
+		$_SESSION["hash"] = $hash;
 	}
-	
-	//Check the session
-	$time = $_SERVER['REQUEST_TIME'];
-
-	//for a 30 minute timeout, specified in seconds
-	$timeout_duration = 1800;
-
-	//look for the user's LAST_ACTIVITY timestamp.
-	if (isset($_SESSION['LAST_ACTIVITY']) && 
-	   ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
-		session_unset();
-		session_destroy();
-		session_start();
-		
-		if($email == "" || $hash == "" && isset($_SESSION["hash"]) && isset($_SESSION["email"])){
-			$email = $_SESSION["email"];
-			$hash = $_SESSION["hash"];
-			echo "STUFF OBTAINED FROM SESSSION";
-		}
-	}
-
-	//LAST_ACTIVITY
-	$_SESSION['LAST_ACTIVITY'] = $time;
 	
 	if($_SERVER["REQUEST_METHOD"] == "POST") {
-		
 		if (empty($_POST["psw"])) {
 			$pswErr = "Password required";
-		} else {
+		} 
+		else {
 			$psw = test_input($_POST["psw"]);
 			// check if password meets necessary requirements
-			// At least one number, one letter, or at least one of the following !@#$% and of length 8-36
+			// At least one number, one letter, and can only be numbers or letter or one of the following !@#$% and of length 8-36
 			if (!preg_match('/^(?=.*\d)(?=.*[A-Za-z])[0-9A-Za-z!@#$%]{8,36}$/', $psw)) {
-			  $pswErr = "Password must contain at least one number, one letter, or one of the following !@#$% and be 8-36 characters long.";
+			  $pswErr = "Password must contain at least one number, one letter, and can only be numbers, letter or one of the following !@#$% and must be 8-36 characters long";
 			}
 			else {
 			  $pswErr = "";
 			}
 		}
 		
-		if($email != "" && $hash != ""){
-			$_SESSION["email"] = $email;
-			$_SESSION["hash"] = $hash;
-			echo "";
+		if(!empty($_SESSION["email"]) && !empty($_SESSION["hash"]) ){
+			$hash = test_input($_SESSION["hash"]);
+			$email = test_input($_SESSION["email"]);
 		}
 		
 		if($pswErr == "" && $email != "" && $hash != ""){
-			
+			//Connect to the DB
+			$servername = "localhost"; //Using my local database for testing -Sergio
+			$username = "serodrig";
+			$password = "AAIOWYSM";
+			$dBName = "f17_serodrig";
+		
 			// Create connection
 			$conn = new mysqli($servername, $username, $password, $dBName);
 
@@ -87,12 +70,38 @@
 				$pswResult = $pswStmt->get_result();
 				if($pswResult->num_rows == 1){
 					if($hash2 = $pswResult->fetch_assoc()){ //Get the Hash
-						echo "PASSWORD CHANGGES";
+						if($hash2["password"] == $hash){
+							//Hash is correct; allow password change
+							$pswUpdateQuery = "UPDATE Users SET password = ? WHERE email = ?";
+							$pswUpdateStmt = $conn->prepare($pswUpdateQuery);
+							
+							//Hash Password
+							$pswHash = password_hash($psw, PASSWORD_DEFAULT);
+							
+							$pswUpdateStmt->bind_param("ss", $pswHash, $email);
+							$pswUpdateStmt->execute();
+							$pswUpdateStmt->close();
+							$pswStmt->close();
+							
+							unset($_SESSION['hash']);
+							unset($_SESSION['email']);
+							session_destroy();
+							
+							redirect("./login.php");
+						}
+						else{
+							echo "HACKS!!!!";
+						}
 					}
+				}else{
+					$pswStmt->close();
 				}
 			}
+			else{
+				//User not found
+			}
 			
-		}	
+		}
 	}
 	
 	function test_input($data) {
