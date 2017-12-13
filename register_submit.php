@@ -93,9 +93,6 @@
 			$stmtAddCustomer->bind_param("ssss", $email, $fname, $lname, $pswHash);
 			$stmtAddCustomer->execute();
 			$stmtAddCustomer->close();
-			
-			//Redirect to the login screen
-			redirect("./login.php");
 		}
 		$stmt->close();
 		$conn->close();
@@ -108,12 +105,5 @@
 	  $data = stripslashes($data);
 	  $data = htmlspecialchars($data);
 	  return $data;
-	}
-	
-	function redirect($url) {
-	  ob_start();
-	  header('Location: '.$url);
-	  ob_end_flush();
-	  die();
 	}
 ?>
