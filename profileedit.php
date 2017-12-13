@@ -12,83 +12,91 @@
 	<script>
 		function changeColor() {
 			if(document.getElementById('background_colors').value == "cyan") {
-                        	document.getElementById("profile_info").style = "background-color: cyan";
-                	}   	
+				document.getElementsByClassName("profile_info")[0].style = "background-color: cyan";
+			}   	
 			else if(document.getElementById('background_colors').value == "yellow") {
-                        	document.getElementById("profile_info").style = "background-color: yellow";
-                	}   	
+				document.getElementsByClassName("profile_info")[0].style = "background-color: yellow";
+			}   	
 			else if(document.getElementById('background_colors').value == "red") {
-                        	document.getElementById("profile_info").style = "background-color: red";
-                	}
+				document.getElementsByClassName("profile_info")[0].style = "background-color: red";
+			}   	
 		}
-
+		
 		function changeImage() {
 			if(document.getElementById('images').value == "cat") {
-                        	document.getElementById("img").src = "images/cat.jpg";
-                	}   	
+				document.getElementById("img").src = "images/cat.jpg";
+				document.getElementById("img").style = "display: block;";
+				document.getElementsByClassName("profile_image")[0].style = "display: none;";
+				
+			}   	
 			else if(document.getElementById('images').value == "dog") {
-                        	document.getElementById("img").src = "images/dog.jpg";
-                	}   	
+				document.getElementById("img").src = "images/dog.jpg";
+				document.getElementById("img").style = "display: block;";
+				document.getElementsByClassName("profile_image")[0].style = "display: none;";
+				
+			}   	
 			else if(document.getElementById('images').value == "turtle") {
-                        	document.getElementById("img").src = "images/turtle.jpg";
-                	}   	
+				document.getElementById("img").src = "images/turtle.jpg";
+				document.getElementById("img").style = "display: block;";
+				
+			}   	
 		}
 		
 		function submitChanges() {
 			//Connect to the DB
-	                /*$servername = "localhost"; //Using my local database for testing -Sergio
-	                $username = "serodrig";
-	                $password = "AAIOWYSM";
-	                $dBName = "f17_serodrig";
-
-        	        // Create connection
-        	        $conn = new mysqli($servername, $username, $password, $dBName);
-
-        	        // Check connection
-        	        if ($conn->connect_error) {
-        	                die("Connection failed: " . $conn->connect_error);
-        	        }
-			
-			$email = $_SESSION["email"];
-			// update avatar image path 
-			$avatar = "<script>document.getElementById('img').src<//script>"
-        	        $userQuery = "UPDATE User_Profile SET avatar = ? WHERE email LIKE ?";
-                	$stmt = $conn->prepare($userQuery);
-                	$stmt->bind_param("ss", $avatar, $email);
-                	$stmt->execute();
-			$stmt->close();
-			
-			// update background color 
-			$color = "<script>document.getElementById('background_colors').value<//script>"
-        	        $userQuery = "UPDATE User_Profile SET background = ? WHERE email LIKE ?";
-                	$stmt = $conn->prepare($userQuery);
-                	$stmt->bind_param("ss", $color, $email);
-                	$stmt->execute();
-			$stmt->close();
+			/*$servername = "localhost"; //Using my local database for testing -Sergio
+				$username = "serodrig";
+				$password = "AAIOWYSM";
+				$dBName = "f17_serodrig";
 				
-			// update intro
-			$intro = "<script>document.getElementById('text1').value<//script>"
-        	        $userQuery = "UPDATE User_Profile SET intro = ? WHERE email LIKE ?";
-                	$stmt = $conn->prepare($userQuery);
-                	$stmt->bind_param("ss", $intro, $email);
-                	$stmt->execute();
-			$stmt->close();
-
-			// update hobbies
-			$hobbies = "<script>document.getElementById('text2').value<//script>"
-        	        $userQuery = "UPDATE User_Profile SET hobbies = ? WHERE email LIKE ?";
-                	$stmt = $conn->prepare($userQuery);
-                	$stmt->bind_param("ss", $hobbies, $email);
-                	$stmt->execute();
-
-			// update music
-			$music = "<script>document.getElementById('text3').value<//script>"
-        	        $userQuery = "UPDATE User_Profile SET music = ? WHERE email LIKE ?";
-                	$stmt = $conn->prepare($userQuery);
-                	$stmt->bind_param("ss", $music, $email);
-                	$stmt->execute();
+				// Create connection
+				$conn = new mysqli($servername, $username, $password, $dBName);
+				
+				// Check connection
+				if ($conn->connect_error) {
+				die("Connection failed: " . $conn->connect_error);
+				}
+				
+				$email = $_SESSION["email"];
+				// update avatar image path 
+				$avatar = "<script>document.getElementById('img').src<//script>"
+				$userQuery = "UPDATE User_Profile SET avatar = ? WHERE email LIKE ?";
+				$stmt = $conn->prepare($userQuery);
+				$stmt->bind_param("ss", $avatar, $email);
+				$stmt->execute();
+				$stmt->close();
+				
+				// update background color 
+				$color = "<script>document.getElementById('background_colors').value<//script>"
+				$userQuery = "UPDATE User_Profile SET background = ? WHERE email LIKE ?";
+				$stmt = $conn->prepare($userQuery);
+				$stmt->bind_param("ss", $color, $email);
+				$stmt->execute();
+				$stmt->close();
+				
+				// update intro
+				$intro = "<script>document.getElementById('text1').value<//script>"
+				$userQuery = "UPDATE User_Profile SET intro = ? WHERE email LIKE ?";
+				$stmt = $conn->prepare($userQuery);
+				$stmt->bind_param("ss", $intro, $email);
+				$stmt->execute();
+				$stmt->close();
+				
+				// update hobbies
+				$hobbies = "<script>document.getElementById('text2').value<//script>"
+				$userQuery = "UPDATE User_Profile SET hobbies = ? WHERE email LIKE ?";
+				$stmt = $conn->prepare($userQuery);
+				$stmt->bind_param("ss", $hobbies, $email);
+				$stmt->execute();
+				
+				// update music
+				$music = "<script>document.getElementById('text3').value<//script>"
+				$userQuery = "UPDATE User_Profile SET music = ? WHERE email LIKE ?";
+				$stmt = $conn->prepare($userQuery);
+				$stmt->bind_param("ss", $music, $email);
+				$stmt->execute();
 			$stmt->close();*/
-
+			
 			//$conn->close();
 			window.alert("Your changes have been submitted");
 		}
@@ -98,10 +106,29 @@
 		}
 	?>
 	<body>
-		<div id="profile_info">
-			<div id="profile_image">
-				<img id="img" src="" alt="">
+		<div class="profile_info">
+			<div class="profile_image">
+				
 			</div>
+			
+			<img id="img" src="" alt="">
+			<br>
+			<div id="selectors">
+				<select id="images" onChange="changeImage()">
+					<option value="none">Select an Avatar Image</option>
+					<option value="cat">Cat</option>
+					<option value="dog">Dog</option>
+					<option value="turtle">Turtle</option>
+				</select>
+				
+				<select id="background_colors" onChange="changeColor()">
+					<option value="none">Select a Background Color</option>
+					<option value="cyan">Cyan</option>
+					<option value="yellow">Yellow</option>
+					<option value="red">Red</option>
+				</select>
+			</div>
+			
 			
 			<div id="intro">
 				<textarea id="text1"></textarea>
@@ -115,21 +142,7 @@
 				<textarea id="text3"></textarea>
 			</div>
 			
-			<div id="selectors">
-				<select id="images" onChange="changeImage()">
-					<option value="none">Select an Avatar Image</option>
-					<option value="cat">Cat</option>
-					<option value="dog">Dog</option>
-					<option value="turtle">Turtle</option>
-				</select>
 			
-				<select id="background_colors" onChange="changeColor()">
-					<option value="none">Select a Background Color</option>
-					<option value="cyan">Cyan</option>
-					<option value="yellow">Yellow</option>
-					<option value="red">Red</option>
-				</select>
-			</div>
 			<form method="POST" action=''>
 				<input type="submit" name="submit_button" value="Submit Changes">
 			</form>

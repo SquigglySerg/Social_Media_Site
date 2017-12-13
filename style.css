@@ -113,7 +113,7 @@ STYLING FOR PROFILE PAGE*/
 	border: solid 1px black;
 }
 
-.intro, .hobbies, .music {
+#intro, #hobbies, #music {
 	display: block;
 	border: 5px solid black;
 	margin: auto;

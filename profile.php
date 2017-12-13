@@ -69,15 +69,15 @@
 			</div>
 			
 			<br>
-			<div class="intro">
+			<div id="intro">
 				Introduction
 			</div>		
 			<br>
-			<div class="hobbies">
+			<div id="hobbies">
 				Hobbies
 			</div>
 			<br>
-			<div class="music">
+			<div id="music">
 				Music
 			</div>
 			
