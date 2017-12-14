@@ -16,17 +16,6 @@
 				echo "window.alert('".$email."')";
 	?>
 	<script>
-		function changeColor() {
-			if(document.getElementById('background_colors').value == "cyan") {
-				document.getElementsByClassName("profile_info")[0].style = "background-color: cyan";
-			}   	
-			else if(document.getElementById('background_colors').value == "yellow") {
-				document.getElementsByClassName("profile_info")[0].style = "background-color: yellow";
-			}   	
-			else if(document.getElementById('background_colors').value == "red") {
-				document.getElementsByClassName("profile_info")[0].style = "background-color: red";
-			}   	
-		}
 		
 		function changeImage() {
 			if(document.getElementById('images').value == "cat") {
@@ -139,13 +128,6 @@
 					<option value="cat">Cat</option>
 					<option value="dog">Dog</option>
 					<option value="turtle">Turtle</option>
-				</select>
-				
-				<select id="background_colors" name="colors" onChange="changeColor()">
-					<option value="none">Select a Background Color</option>
-					<option value="cyan">Cyan</option>
-					<option value="yellow">Yellow</option>
-					<option value="red">Red</option>
 				</select>
 			</div>
 			

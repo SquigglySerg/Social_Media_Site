@@ -65,6 +65,7 @@ STYLING FOR PROFILE PAGE*/
 	border: 5px solid black;
 	padding: 10px;
 	padding-top: 20px;
+	font-size: 20px;
 }
 
 .profile_image{
@@ -90,7 +91,6 @@ STYLING FOR PROFILE PAGE*/
 	text-align: center;
 	display: block;
 	margin: auto;	
-	border: solid 1px black;
 }
 
 
