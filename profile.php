@@ -10,6 +10,11 @@
 		<title>Modern Peeps</title>
 	</head>
 	
+	<script type="text/javascript">
+            function directToEditPage() {
+               window.location="./profileedit.php";
+            }
+      </script>
 	
 	<body>
 		<?php
@@ -36,6 +41,7 @@
 			<div id="music">
 				Music
 			</div>
+			<button type="submit" onclick="directToEditPage()">Edit Profile</button>
 		</div>
 		
 	</body>
