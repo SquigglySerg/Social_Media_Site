@@ -12,6 +12,10 @@
 	
 	
 	<body>
+		<?php
+			$active = "profile";
+			include './header.php';
+		?>
 		<div class="profile_info">
 			<div class="profile_image">
 			</div>
