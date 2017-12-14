@@ -41,10 +41,13 @@
 				
 			}   	
 		}
-		
+
+	</script>
+	<script>		
 		function submitChanges() {
 			//Connect to the DB
-			/*$servername = "localhost"; //Using my local database for testing -Sergio
+			<?php
+				$servername = "localhost"; //Using my local database for testing -Sergio
 				$username = "serodrig";
 				$password = "AAIOWYSM";
 				$dBName = "f17_serodrig";
@@ -56,18 +59,18 @@
 				if ($conn->connect_error) {
 				die("Connection failed: " . $conn->connect_error);
 				}
-				
+				session_start();
 				$email = $_SESSION["email"];
 				// update avatar image path 
-				$avatar = "<script>document.getElementById('img').src<//script>"
+				$avatar = htmlspecialchars($_POST["avatar"]);;
 				$userQuery = "UPDATE User_Profile SET avatar = ? WHERE email LIKE ?";
 				$stmt = $conn->prepare($userQuery);
 				$stmt->bind_param("ss", $avatar, $email);
 				$stmt->execute();
 				$stmt->close();
-				
+			
 				// update background color 
-				$color = "<script>document.getElementById('background_colors').value<//script>"
+				$color = htmlspecialchars($_POST["colors"]);;
 				$userQuery = "UPDATE User_Profile SET background = ? WHERE email LIKE ?";
 				$stmt = $conn->prepare($userQuery);
 				$stmt->bind_param("ss", $color, $email);
@@ -75,7 +78,7 @@
 				$stmt->close();
 				
 				// update intro
-				$intro = "<script>document.getElementById('text1').value<//script>"
+				$intro = htmlspecialchars($_POST["introT"]);;
 				$userQuery = "UPDATE User_Profile SET intro = ? WHERE email LIKE ?";
 				$stmt = $conn->prepare($userQuery);
 				$stmt->bind_param("ss", $intro, $email);
@@ -83,28 +86,28 @@
 				$stmt->close();
 				
 				// update hobbies
-				$hobbies = "<script>document.getElementById('text2').value<//script>"
+				$hobbies = htmlspecialchars($_POST["hobbiesT"]);;
 				$userQuery = "UPDATE User_Profile SET hobbies = ? WHERE email LIKE ?";
 				$stmt = $conn->prepare($userQuery);
 				$stmt->bind_param("ss", $hobbies, $email);
 				$stmt->execute();
 				
 				// update music
-				$music = "<script>document.getElementById('text3').value<//script>"
+				$music = htmlspecialchars($_POST["musicT"]);;
 				$userQuery = "UPDATE User_Profile SET music = ? WHERE email LIKE ?";
 				$stmt = $conn->prepare($userQuery);
 				$stmt->bind_param("ss", $music, $email);
 				$stmt->execute();
-			$stmt->close();*/
+			$stmt->close();
 			
-			//$conn->close();
-			window.alert("Your changes have been submitted");
+			$conn->close();
+			//echo "window.alert('Submitted')";
+			//$intro = htmlspecialchars($_POST["introT"]);
+			//	echo "window.alert('".$intro."')";
+			?>
 		}
 	</script>
-	<?php
-		if(isset($_POST['submit_button'])) {
-		}
-	?>
+
 	<body>
 		<div class="profile_info">
 			<div class="profile_image">
@@ -113,15 +116,16 @@
 			
 			<img id="img" src="" alt="">
 			<br>
+			<form method="post" >
 			<div id="selectors">
-				<select id="images" onChange="changeImage()">
+				<select id="images" name="avatar" onChange="changeImage()">
 					<option value="none">Select an Avatar Image</option>
 					<option value="cat">Cat</option>
 					<option value="dog">Dog</option>
 					<option value="turtle">Turtle</option>
 				</select>
 				
-				<select id="background_colors" onChange="changeColor()">
+				<select id="background_colors" name="colors" onChange="changeColor()">
 					<option value="none">Select a Background Color</option>
 					<option value="cyan">Cyan</option>
 					<option value="yellow">Yellow</option>
@@ -131,22 +135,18 @@
 			
 			
 			<div id="intro">
-				<textarea id="text1"></textarea>
+				<textarea type="text" name="introT" id="text1"></textarea>
 			</div>		
 			
 			<div id="hobbies">
-				<textarea id="text2"></textarea>
+				<textarea type="text" name="hobbiesT" id="text2"></textarea>
 			</div>
 			
 			<div id="music">
-				<textarea id="text3"></textarea>
+				<textarea type="text" name="musicT" id="text3"></textarea>
 			</div>
-			
-			
-			<form method="POST" action=''>
-				<input type="submit" name="submit_button" value="Submit Changes">
+			<button onClick="submitChanges()">Submit Changes</button>	
 			</form>
 		</div>
-		
 	</body>
 </html>
