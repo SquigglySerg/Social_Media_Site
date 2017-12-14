@@ -28,5 +28,9 @@
 				die();
 			}
 		?>
+<<<<<<< HEAD
+=======
+		<?php include "footer.php";?>
+>>>>>>> 40c904783644f259a0280bf0482300910d5b5ec7
 	</body>
 </html>

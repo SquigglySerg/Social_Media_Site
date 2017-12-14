@@ -61,7 +61,7 @@ ul.topnav li.right {
 		if($active == "profile"){echo "<li><a href=\"./profile.php\" class=\"active\" >Profile</a></li>";}
 		else {echo "<li><a href=\"./profile.php\">Profile</a></li>";}
 		
-		echo "<li class=\"right\"><a href=\"./login.php\">Logout</a></li>";
+		echo "<li class=\"right\"><a href=\"./logout.php\">Logout</a></li>";
 	}
 	else{
 		//User not logged in

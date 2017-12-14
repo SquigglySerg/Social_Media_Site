@@ -81,8 +81,11 @@
 		if($stmt->fetch()){
 			//User Exist
 			$emailErr = "Email already in use";
+			$stmt->close();
 		}
 		else{
+			$stmt->close();
+			
 			//Create user
 			$addCustomerQuery = "INSERT INTO Users (email, firstName, lastName, password, verified) VALUES (?,?,?,?,?)";
 			$stmtAddCustomer = $conn->prepare($addCustomerQuery);
@@ -96,18 +99,17 @@
 			$stmtAddCustomer->close();
 			
 			//Create user profile shell
-			$addCustomerQuery = "INSERT INTO User_Profile (intro, hobbies, music, avatar, background, email) VALUES (?,?,?,?,?,(SELECT email FROM Users WHERE email = ?))";
-			$stmtAddCustomer = $conn->prepare($addCustomerQuery);
+			$addCustomerProfileQuery = "INSERT INTO User_Profile (intro, hobbies, music, avatar, email) VALUES (?,?,?,?,(SELECT email FROM Users WHERE email = ?))";
+			$stmtAddCustomerProfile = $conn->prepare($addCustomerProfileQuery);
 			
 			$intro = "Go to editinfo to change intro";
 			$hobbies = "Go to editinfo to change hobbies";
 			$music = "Go to editinfo to change music";
 			$avatar = "";
-			$background = "";
 			
-			$stmtAddCustomer->bind_param("ssssss", $intro, $hobbies, $music, $avatar, $background, $email);
-			$stmtAddCustomer->execute();
-			$stmtAddCustomer->close();
+			$stmtAddCustomerProfile->bind_param("sssss", $intro, $hobbies, $music, $avatar, $email);
+			$stmtAddCustomerProfile->execute();
+			$stmtAddCustomerProfile->close();
 			
 			//Send verification email
 			$msgLink = "http://luna.mines.edu/serodrig/emailverify.php?email=" . $email . "&code=" . $pswHash;
@@ -122,7 +124,7 @@
 			//Redirect to the login screen
 			redirect("./emailverify.php");
 		}
-		$stmt->close();
+		
 		$conn->close();
 	  }
 	  
