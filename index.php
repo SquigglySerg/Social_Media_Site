@@ -13,13 +13,21 @@
 		<?php 
 		$active = "index";
 		include './header.php';?>
-		INDEX
+		<h1 class="index">
+		
+		Welcome to the Modern Peeps Non-Dating Site!!
+		<br><br>
+		Click the Sign Up button to create a profile or the Sign In button to update your profile.
 		
 		
+		
+		</h1>
+		
+		<?php include "footer.php";?>
 	</body>
 	
 
-<?php include "footer.php";?>
+
 	
 
 </html>

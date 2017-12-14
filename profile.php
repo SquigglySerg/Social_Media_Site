@@ -43,7 +43,7 @@
 			</div>
 			<button type="submit" onclick="directToEditPage()">Edit Profile</button>
 		</div>
-		
+		<?php include "footer.php";?>
 	</body>
 <?php
 		$servername = "localhost"; //Using my local database for testing -Sergio
