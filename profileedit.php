@@ -28,6 +28,7 @@
 				document.getElementById("img").style = "display: block;";
 				document.getElementsByClassName("profile_image")[0].style = "display: none;";
 				
+				
 			}   	
 			else if(document.getElementById('images').value == "dog") {
 				document.getElementById("img").src = "images/dog.jpg";
@@ -38,6 +39,7 @@
 			else if(document.getElementById('images').value == "turtle") {
 				document.getElementById("img").src = "images/turtle.jpg";
 				document.getElementById("img").style = "display: block;";
+				document.getElementsByClassName("profile_image")[0].style = "display: none;";
 				
 			}   	
 		}
@@ -63,6 +65,15 @@
 				$email = $_SESSION["email"];
 				// update avatar image path 
 				$avatar = htmlspecialchars($_POST["avatar"]);;
+				if($avatar == "cat") {
+					$avatar = "images/cat.jpg";
+				}
+				else if($avatar == "dog") {
+					$avatar = "images/dog.jpg";
+				}
+				else if($avatar == "turtle") {
+					$avatar = "images/turtle.jpg";
+				}
 				$userQuery = "UPDATE User_Profile SET avatar = ? WHERE email LIKE ?";
 				$stmt = $conn->prepare($userQuery);
 				$stmt->bind_param("ss", $avatar, $email);
@@ -135,18 +146,93 @@
 			
 			
 			<div id="intro">
-				<textarea type="text" name="introT" id="text1"></textarea>
+				<textarea id="introT" type="text" name="introT" id="text1"></textarea>
 			</div>		
 			
 			<div id="hobbies">
-				<textarea type="text" name="hobbiesT" id="text2"></textarea>
+				<textarea id="hobbiesT" type="text" name="hobbiesT" id="text2"></textarea>
 			</div>
 			
 			<div id="music">
-				<textarea type="text" name="musicT" id="text3"></textarea>
+				<textarea id="musicT" type="text" name="musicT" id="text3"></textarea>
 			</div>
 			<button onClick="submitChanges()">Submit Changes</button>	
 			</form>
 		</div>
+		<?php
+                $servername = "localhost"; //Using my local database for testing -Sergio
+                $username = "serodrig";
+                $password = "AAIOWYSM";
+                $dBName = "f17_serodrig";
+
+                // Create connection
+                $conn = new mysqli($servername, $username, $password, $dBName);
+
+                // Check connection
+                if ($conn->connect_error) {
+                        die("Connection failed: " . $conn->connect_error);
+                }
+    
+                // Fill in the image
+                $userQuery = "SELECT avatar FROM User_Profile WHERE email LIKE ?";
+                $stmt = $conn->prepare($userQuery);
+                $stmt->bind_param("s", $email);
+                $stmt->execute();
+                $result = $stmt->get_result();  
+                $stmt->close();
+                while($row = $result->fetch_assoc()) {
+ 		$image = $row["avatar"];
+                        echo "<script>";
+                        echo "document.getElementById('img').src = '".$image."';";
+                        echo "document.getElementById('img').style = 'display: block;';";
+                        echo "document.getElementsByClassName('profile_image')[0].style = 'display: none;';";
+
+                        echo "</script>";
+                }
+
+                // Fill in the intro box
+                $userQuery = "SELECT intro FROM User_Profile WHERE email LIKE ?";
+                $stmt = $conn->prepare($userQuery);
+                $stmt->bind_param("s", $email);
+                $stmt->execute();
+                $result = $stmt->get_result();
+                $stmt->close();
+                while($row = $result->fetch_assoc()) {
+                        $intro = $row["intro"];
+                        echo "<script>";
+                        echo "document.getElementById('introT').value = '".$intro."';";
+                        echo "</script>";
+                }
+
+                // Fill in the hobbies box
+                $userQuery = "SELECT hobbies FROM User_Profile WHERE email LIKE ?";
+                $stmt = $conn->prepare($userQuery);
+                $stmt->bind_param("s", $email);
+                $stmt->execute();
+                $result = $stmt->get_result();
+                $stmt->close();
+   		while($row = $result->fetch_assoc()) {
+                        $hobbies = $row["hobbies"];
+                        echo "<script>";
+                        echo "document.getElementById('hobbiesT').value = '".$hobbies."';";
+                        echo "</script>";
+                }
+
+                // Fill in the music box
+                $userQuery = "SELECT music FROM User_Profile WHERE email LIKE ?";
+                $stmt = $conn->prepare($userQuery);
+                $stmt->bind_param("s", $email);
+                $stmt->execute();
+                $result = $stmt->get_result();
+                $stmt->close();
+                while($row = $result->fetch_assoc()) {
+                        $music = $row["music"];
+                        echo "<script>";
+                        echo "document.getElementById('musicT').value = '".$music."';";
+                        echo "</script>";
+                }
+                $conn->close();
+        ?>
+
 	</body>
 </html>
