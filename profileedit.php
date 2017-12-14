@@ -120,6 +120,10 @@
 	</script>
 
 	<body>
+		<?php
+			$active = "edit";
+			include './header.php';
+		?>
 		<div class="profile_info">
 			<div class="profile_image">
 				
