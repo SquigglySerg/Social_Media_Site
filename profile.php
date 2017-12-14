@@ -20,6 +20,14 @@
 		<?php
 			$active = "profile";
 			include './header.php';
+
+				if(empty($_SESSION["email"])){
+					header("Location: login.php");
+					
+					
+				}
+				$email = $_SESSION["email"];
+	
 		?>
 		<div class="profile_info">
 			<div class="profile_image">
