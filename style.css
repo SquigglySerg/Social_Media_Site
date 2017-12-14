@@ -114,6 +114,17 @@ textarea {
 	width: 99%;
 	height: 97%;
 }
+
+footer{
+   	color: #4C4C4C;
+	text-align: center;
+	padding-top:20px;
+	padding-bottom:20px;
+    background: #4C4C4C; 
+    background: -webkit-linear-gradient(#4C4C4C, #403F3F);
+    background: linear-gradient(#4C4C4C, #403F3F); 
+}
+
 /************************************************************************************************/
 /*Responsive design for 480px screen*/
 
