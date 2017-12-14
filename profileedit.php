@@ -9,7 +9,14 @@
 		<link rel="stylesheet" href="style.css">
 		<title>Modern Peeps</title>
 	</head>
-
+		<?php
+			$active = "edit";
+			include './header.php';	
+				if(empty($_SESSION["email"])){
+					header("Location: login.php");
+				}
+				$email = $_SESSION["email"];
+		?>
 	<script>
 		
 		function changeImage() {
@@ -110,21 +117,7 @@
 	?>
 
 	<body>
-		<?php
-			$active = "edit";
-			include './header.php';
-			
-	
-	
-				
-				if(empty($_SESSION["email"])){
-					header("Location: login.php");
-					
-					
-				}
-				$email = $_SESSION["email"];
-	
-		?>
+
 		<div class="profile_info">
 			<div class="profile_image">
 				
