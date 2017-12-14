@@ -65,6 +65,9 @@ STYLING FOR PROFILE PAGE*/
 	border: 5px solid black;
 	padding: 10px;
 	padding-top: 20px;
+	font-size: 20px;
+    	background-color: #808080;
+	color: white;
 }
 
 .profile_image{
@@ -90,7 +93,6 @@ STYLING FOR PROFILE PAGE*/
 	text-align: center;
 	display: block;
 	margin: auto;	
-	border: solid 1px black;
 }
 
 
@@ -105,14 +107,25 @@ STYLING FOR PROFILE PAGE*/
 	display: block;
 	border: 5px solid black;
 	margin: auto;
-	height: 300px;
+	height: 250px;
 	width: 80%;
-	background-color: yellow;
+    	background-color: #4CAF50;
+}
+
+h2 {
+	text-align: center;
+	font-size: 30px;
+	color: white;
+	display: inline;
 }
 
 textarea {
 	width: 99%;
 	height: 97%;
+    	background-color: #4CAF50;
+	color: white;
+	font-size: 20px;
+	
 }
 /************************************************************************************************/
 /*Responsive design for 480px screen*/

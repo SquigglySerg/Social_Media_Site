@@ -29,17 +29,17 @@
 			<br><br>
 		
 			<br>
+			<h2>Introduction</h2>
 			<div id="intro">
-				Introduction
 			</div>		
 			
 			<br>
+			<h2>Hobbies</h2>
 			<div id="hobbies">
-				Hobbies
 			</div>
 			<br>
+			<h2>Favorite Music</h2>
 			<div id="music">
-				Music
 			</div>
 			<button type="submit" onclick="directToEditPage()">Edit Profile</button>
 		</div>
@@ -58,7 +58,6 @@
                 if ($conn->connect_error) {
                 	die("Connection failed: " . $conn->connect_error);
 		}
-                session_start();
                 $email = $_SESSION["email"];
 		
 		// Fill in the image

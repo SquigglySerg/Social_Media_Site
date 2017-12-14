@@ -13,20 +13,8 @@
 	
 				session_start();
 				$email = $_SESSION["email"];
-				echo "window.alert('".$email."')";
 	?>
 	<script>
-		function changeColor() {
-			if(document.getElementById('background_colors').value == "cyan") {
-				document.getElementsByClassName("profile_info")[0].style = "background-color: cyan";
-			}   	
-			else if(document.getElementById('background_colors').value == "yellow") {
-				document.getElementsByClassName("profile_info")[0].style = "background-color: yellow";
-			}   	
-			else if(document.getElementById('background_colors').value == "red") {
-				document.getElementsByClassName("profile_info")[0].style = "background-color: red";
-			}   	
-		}
 		
 		function changeImage() {
 			if(document.getElementById('images').value == "cat") {
@@ -46,7 +34,16 @@
 				document.getElementById("img").src = "images/turtle.jpg";
 				document.getElementById("img").style = "display: block;";
 				document.getElementsByClassName("profile_image")[0].style = "display: none;";
-				
+			}   	
+			else if(document.getElementById('images').value == "giraffe") {
+				document.getElementById("img").src = "images/giraffe.jpg";
+				document.getElementById("img").style = "display: block;";
+				document.getElementsByClassName("profile_image")[0].style = "display: none;";
+			}   	
+			else if(document.getElementById('images').value == "hedgehog") {
+				document.getElementById("img").src = "images/hedgehog.jpg";
+				document.getElementById("img").style = "display: block;";
+				document.getElementsByClassName("profile_image")[0].style = "display: none;";
 			}   	
 		}
 
@@ -77,20 +74,19 @@
 				else if($avatar == "turtle") {
 					$avatar = "images/turtle.jpg";
 				}
-				$userQuery = "UPDATE User_Profile SET avatar = ? WHERE email LIKE ?";
-				$stmt = $conn->prepare($userQuery);
-				$stmt->bind_param("ss", $avatar, $email);
-				$stmt->execute();
-				$stmt->close();
-			
-				// update background color 
-				$color = htmlspecialchars($_POST["colors"]);
-				$userQuery = "UPDATE User_Profile SET background = ? WHERE email LIKE ?";
-				$stmt = $conn->prepare($userQuery);
-				$stmt->bind_param("ss", $color, $email);
-				$stmt->execute();
-				$stmt->close();
-				
+				else if($avatar == "giraffe") {
+					$avatar = "images/giraffe.jpg";
+				}
+				else if($avatar == "hedgehog") {
+					$avatar = "images/hedgehog.jpg";
+				}
+				if($avatar != "none") {
+					$userQuery = "UPDATE User_Profile SET avatar = ? WHERE email LIKE ?";
+					$stmt = $conn->prepare($userQuery);
+					$stmt->bind_param("ss", $avatar, $email);
+					$stmt->execute();
+					$stmt->close();
+				}
 				// update intro
 				$intro = htmlspecialchars($_POST["introT"]);
 				$userQuery = "UPDATE User_Profile SET intro = ? WHERE email LIKE ?";
@@ -114,9 +110,6 @@
 				$stmt->execute();
 				$stmt->close();
 				$conn->close();		
-			//echo "window.alert('Submitted')";
-			//$intro = htmlspecialchars($_POST["introT"]);
-			//	echo "window.alert('".$intro."')";
 		}
 	?>
 
@@ -139,25 +132,22 @@
 					<option value="cat">Cat</option>
 					<option value="dog">Dog</option>
 					<option value="turtle">Turtle</option>
-				</select>
-				
-				<select id="background_colors" name="colors" onChange="changeColor()">
-					<option value="none">Select a Background Color</option>
-					<option value="cyan">Cyan</option>
-					<option value="yellow">Yellow</option>
-					<option value="red">Red</option>
+					<option value="giraffe">Giraffe</option>
+					<option value="hedgehog">Hedgehog</option>
 				</select>
 			</div>
 			
-			
+			<h2>Introduction</h2>	
 			<div id="intro">
 				<textarea id="intro_text" name="introT"></textarea>
 			</div>		
 			
+			<h2>Hobbies</h2>	
 			<div id="hobbies">
 				<textarea id="hobbies_text" name="hobbiesT"></textarea>
 			</div>
 			
+			<h2>Favorite Music</h2>	
 			<div id="music">
 				<textarea id="music_text" name="musicT"></textarea>
 			</div>
