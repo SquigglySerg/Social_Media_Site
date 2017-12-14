@@ -47,5 +47,6 @@ ul.topnav li.right {float: right;}
 <ul class="topnav">
   <li><a href="./index.php" <?php if($active == "index"){echo "class=\"active\"";} ?>>Home</a></li>
   <li><a href="./profile.php" <?php if($active == "profile"){echo "class=\"active\"";} ?>>Profile</a></li>
+  <li class="right"><a href="./register.php" <?php if($active == "register"){echo "class=\"active\"";} ?>>Sign Up</a></li>
   <li class="right"><a href="./login.php" <?php if($active == "login"){echo "class=\"active\"";} ?>>Login</a></li>
 </ul>
