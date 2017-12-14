@@ -9,6 +9,12 @@
 		<link rel="stylesheet" href="style.css">
 		<title>Modern Peeps</title>
 	</head>
+	<?php
+	
+				session_start();
+				$email = $_SESSION["email"];
+				echo "window.alert('".$email."')";
+	?>
 	<script>
 		function changeColor() {
 			if(document.getElementById('background_colors').value == "cyan") {
@@ -45,10 +51,8 @@
 		}
 
 	</script>
-	<script>		
-		function submitChanges() {
-			//Connect to the DB
-			<?php
+	<?php
+		if($_SERVER["REQUEST_METHOD"] == "POST") {
 				$servername = "localhost"; //Using my local database for testing -Sergio
 				$username = "serodrig";
 				$password = "AAIOWYSM";
@@ -61,15 +65,14 @@
 				if ($conn->connect_error) {
 				die("Connection failed: " . $conn->connect_error);
 				}
-				session_start();
-				$email = $_SESSION["email"];
+
 				// update avatar image path 
-				$avatar = htmlspecialchars($_POST["avatar"]);;
+				$avatar = htmlspecialchars($_POST["avatar"]);
 				if($avatar == "cat") {
 					$avatar = "images/cat.jpg";
 				}
 				else if($avatar == "dog") {
-					$avatar = "images/dog.jpg";
+					$avatar = "images/dog.jpg";	
 				}
 				else if($avatar == "turtle") {
 					$avatar = "images/turtle.jpg";
@@ -81,7 +84,7 @@
 				$stmt->close();
 			
 				// update background color 
-				$color = htmlspecialchars($_POST["colors"]);;
+				$color = htmlspecialchars($_POST["colors"]);
 				$userQuery = "UPDATE User_Profile SET background = ? WHERE email LIKE ?";
 				$stmt = $conn->prepare($userQuery);
 				$stmt->bind_param("ss", $color, $email);
@@ -89,7 +92,7 @@
 				$stmt->close();
 				
 				// update intro
-				$intro = htmlspecialchars($_POST["introT"]);;
+				$intro = htmlspecialchars($_POST["introT"]);
 				$userQuery = "UPDATE User_Profile SET intro = ? WHERE email LIKE ?";
 				$stmt = $conn->prepare($userQuery);
 				$stmt->bind_param("ss", $intro, $email);
@@ -97,27 +100,25 @@
 				$stmt->close();
 				
 				// update hobbies
-				$hobbies = htmlspecialchars($_POST["hobbiesT"]);;
+				$hobbies = htmlspecialchars($_POST["hobbiesT"]);
 				$userQuery = "UPDATE User_Profile SET hobbies = ? WHERE email LIKE ?";
 				$stmt = $conn->prepare($userQuery);
 				$stmt->bind_param("ss", $hobbies, $email);
 				$stmt->execute();
 				
 				// update music
-				$music = htmlspecialchars($_POST["musicT"]);;
+				$music = htmlspecialchars($_POST["musicT"]);
 				$userQuery = "UPDATE User_Profile SET music = ? WHERE email LIKE ?";
 				$stmt = $conn->prepare($userQuery);
 				$stmt->bind_param("ss", $music, $email);
 				$stmt->execute();
-			$stmt->close();
-			
-			$conn->close();
+				$stmt->close();
+				$conn->close();		
 			//echo "window.alert('Submitted')";
 			//$intro = htmlspecialchars($_POST["introT"]);
 			//	echo "window.alert('".$intro."')";
-			?>
 		}
-	</script>
+	?>
 
 	<body>
 		<?php
@@ -150,32 +151,34 @@
 			
 			
 			<div id="intro">
-				<textarea id="introT" type="text" name="introT" id="text1"></textarea>
+				<textarea id="intro_text" name="introT"></textarea>
 			</div>		
 			
 			<div id="hobbies">
-				<textarea id="hobbiesT" type="text" name="hobbiesT" id="text2"></textarea>
+				<textarea id="hobbies_text" name="hobbiesT"></textarea>
 			</div>
 			
 			<div id="music">
-				<textarea id="musicT" type="text" name="musicT" id="text3"></textarea>
+				<textarea id="music_text" name="musicT"></textarea>
 			</div>
-			<button onClick="submitChanges()">Submit Changes</button>	
+			<button type="submit" onClick="submitChanges()">Submit Changes</button>	
 			</form>
 		</div>
-		<?php
-                $servername = "localhost"; //Using my local database for testing -Sergio
-                $username = "serodrig";
-                $password = "AAIOWYSM";
-                $dBName = "f17_serodrig";
+		<?php	
+		$servername = "localhost"; //Using my local database for testing -Sergio
+		$username = "serodrig";
+		$password = "AAIOWYSM";
+		$dBName = "f17_serodrig";
+				
+		// Create connection
+		$conn = new mysqli($servername, $username, $password, $dBName);
+				
+		// Check connection
+		if ($conn->connect_error) {
+			die("Connection failed: " . $conn->connect_error);
+		}
 
-                // Create connection
-                $conn = new mysqli($servername, $username, $password, $dBName);
 
-                // Check connection
-                if ($conn->connect_error) {
-                        die("Connection failed: " . $conn->connect_error);
-                }
     
                 // Fill in the image
                 $userQuery = "SELECT avatar FROM User_Profile WHERE email LIKE ?";
@@ -190,7 +193,6 @@
                         echo "document.getElementById('img').src = '".$image."';";
                         echo "document.getElementById('img').style = 'display: block;';";
                         echo "document.getElementsByClassName('profile_image')[0].style = 'display: none;';";
-
                         echo "</script>";
                 }
 
@@ -204,7 +206,7 @@
                 while($row = $result->fetch_assoc()) {
                         $intro = $row["intro"];
                         echo "<script>";
-                        echo "document.getElementById('introT').value = '".$intro."';";
+                        echo "document.getElementById('intro_text').value = '".$intro."';";
                         echo "</script>";
                 }
 
@@ -218,7 +220,7 @@
    		while($row = $result->fetch_assoc()) {
                         $hobbies = $row["hobbies"];
                         echo "<script>";
-                        echo "document.getElementById('hobbiesT').value = '".$hobbies."';";
+                        echo "document.getElementById('hobbies_text').value = '".$hobbies."';";
                         echo "</script>";
                 }
 
@@ -232,7 +234,7 @@
                 while($row = $result->fetch_assoc()) {
                         $music = $row["music"];
                         echo "<script>";
-                        echo "document.getElementById('musicT').value = '".$music."';";
+                        echo "document.getElementById('music_text').value = '".$music."';";
                         echo "</script>";
                 }
                 $conn->close();
