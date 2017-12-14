@@ -12,7 +12,10 @@
 	</head>
 	<body>
 	
-		<?php include 'passwordchange_submit.php';?>
+		<?php include 'passwordchange_submit.php';
+			$active = "passwordchange";
+			include './header.php';
+		?>
 		<form class="loginbox-content" method="post" action='<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>'>
 			
 			<div class="container">

@@ -11,7 +11,10 @@
 	</head>
 	<body>
 		<script src="script.js"></script>
-		<?php include 'register_submit.php'; ?>
+		<?php include 'register_submit.php';
+			$active = "register";
+			include './header.php';
+		?>
 		<div id="login" class="loginbox">
 			<form class="loginbox-content" method="post" action='<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>'>
 				

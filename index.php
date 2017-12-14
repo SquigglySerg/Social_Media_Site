@@ -10,6 +10,9 @@
 		<title>Modern Peeps</title>
 	</head>
 	<body>
+		<?php 
+		$active = "index";
+		include './header.php';?>
 		INDEX
 		
 		

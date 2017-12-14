@@ -11,6 +11,10 @@
 	</head>
 	<body>
 		<script src="script.js"></script>
+		<?php
+			$active = "emailverify";
+			include './header.php';
+		?>
 		<div id="login" class="loginbox">
 			<div class="loginbox-content">
 			<?php 

@@ -11,7 +11,10 @@
 	</head>
 	<body>
 		<script src="script.js"></script>
-		<?php include './passwordreset_submit.php';?>
+		<?php include './passwordreset_submit.php';
+			$active = "passwordreset";
+			include './header.php';
+		?>
 		
 		<!--use the GET hashed password and EMAIL to confirm user and then use update sql command to replace user password-->
 		<form class="loginbox-content" method="post" action='<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>'>
